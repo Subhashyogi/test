@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+.contact-right{
+    width: 100%;
+    padding-left: 20%;
+    /* padding-top: 5%; */
+}
+
+form input, form textarea{
+    display: flex;
+    width: 50%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+.btn{
+    text-decoration: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #000;
+    padding: 8px 14px;
+    margin: 40px 5px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+}
+.btn,.bt:focus{
+    outline: 0;
+}
+.btn,.bt:active{
+    transform: scale(0.98);
+}
+form btn{
+    padding: 14px 60px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.bt{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #000;
+    padding: 8px 14px;
+    margin: 10px 10px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+}
+
+.opt input{
+    width: 5%;
+}
+
+    </style>
+</head>
+<body>
+    <div class="contact-right">
+        <form name="submit-to-google-sheet">
+            <input type="text" name="Name" placeholder="Your Name" required>
+            <input type="email" name="Email" placeholder="Your Email" required>
+            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+            <h3 class="Q">Q. 1 Did you play Game</h3>
+            <div class="butn">
+            <button onclick="showOptions('Yes')" type="menu" class="bt">Yes</button>
+            <button onclick="showOptions('No')" type="menu" class="bt">No</button>
+            </div>
+            <div class="opt"id="options" style="display: none;">
+                <h3>Choose your game:</h3>
+                <input class="op"type="radio" name="game" id="option1" value="Cricket">
+                <label for="option1">Cricket</label><br>
+                <input class="op"type="radio" name="game" id="option2" value="Football">
+                <label for="option2">Football</label><br>
+                <input class="op"type="radio" name="game" id="option3" value="Basketball">
+                <label for="option3">Basketball</label><br>
+              </div>
+            <button type="submit" class="btn btn2">Submit</button>
+        </form>
+        <span id="msg"></span>
+    </div>
+
+    <script>
+        function showOptions(answer) {
+          const optionsContainer = document.getElementById("options");
+          if (answer === "Yes") {
+            optionsContainer.style.display = "block";
+          } else {
+            optionsContainer.style.display = "none";
+          }
+        }
+      </script>
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby--6pWn4QesHnEsVeu_L51B9OZmHv49ueqOYGPfXjPau1lijAyoFsbG-EFpGw5ItnV/exec'
+const form = document.forms['submit-to-google-sheet']
+const msg = document.getElementById("msg");
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => {
+        msg.innerHTML = "Message sent successfully";
+        setTimeout(function(){
+            msg.innerHTML = ""
+        },5000)
+        form.reset()
+    })
+    .catch(error => console.error('Error!', error.message))
+})
+      </script>
+</body>
+</html>
