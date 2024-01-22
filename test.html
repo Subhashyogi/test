@@ -91,8 +91,8 @@ form btn{
             <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
             <h3 class="Q">Q. 1 Did you play Game</h3>
             <div class="butn">
-            <button onclick="showOptions('Yes')" type="menu" class="bt">Yes</button>
-            <button onclick="showOptions('No')" type="menu" class="bt">No</button>
+            <button onclick="showOptions('Yes')" class="bt">Yes</button>
+            <button onclick="showOptions('No')" class="bt">No</button>
             </div>
             <div class="opt"id="options" style="display: none;">
                 <h3>Choose your game:</h3>
@@ -103,6 +103,20 @@ form btn{
                 <input class="op"type="radio" name="game" id="option3" value="Basketball">
                 <label for="option3">Basketball</label><br>
               </div>
+              <h3 class="Q">Q. 2 Did you read book</h3>
+            <div class="butn">
+            <button onclick="showOptions2('Yes')" class="bt">Yes</button>
+            <button onclick="showOptions2('No')"  class="bt">No</button>
+            </div>
+            <div class="opt"id="options2" style="display: none;">
+                <h3>Choose your book:</h3>
+                <input class="op"type="radio" name="book" id="option1" value="Story">
+                <label for="option1">Story</label><br>
+                <input class="op"type="radio" name="book" id="option2" value="Comic">
+                <label for="option2">Comic</label><br>
+                <input class="op"type="radio" name="book" id="option3" value="Manga">
+                <label for="option3">Manga</label><br>
+              </div>
             <button type="submit" class="btn btn2">Submit</button>
         </form>
         <span id="msg"></span>
@@ -111,6 +125,16 @@ form btn{
     <script>
         function showOptions(answer) {
           const optionsContainer = document.getElementById("options");
+          if (answer === "Yes") {
+            optionsContainer.style.display = "block";
+          } else {
+            optionsContainer.style.display = "none";
+          }
+        }
+      </script>
+      <script>
+        function showOptions2(answer) {
+          const optionsContainer = document.getElementById("options2");
           if (answer === "Yes") {
             optionsContainer.style.display = "block";
           } else {
